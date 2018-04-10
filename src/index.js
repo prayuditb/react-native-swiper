@@ -214,7 +214,6 @@ export default class extends Component {
   initState (props, updateIndex = false) {
     // set the current state
     const state = this.state || { width: 0, height: 0, offset: { x: 0, y: 0 } }
-
     const initState = {
       autoplayEnd: false,
       loopJump: false,
@@ -392,6 +391,9 @@ export default class extends Component {
    * @param  {string} dir    'x' || 'y'
    */
   updateIndex = (offset, dir, cb) => {
+    if (offset === undefined || this.internals.offset === undefined) {
+      return;
+    }
     const state = this.state
     let index = state.index
     const diff = offset[dir] - this.internals.offset[dir]
